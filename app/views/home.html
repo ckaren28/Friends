@@ -1,0 +1,75 @@
+<html>
+  <head>
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+    <title>Friends</title>
+    <style type="text/css">
+    	.welcome, .logout{
+    		display: inline-block;
+    		margin-left: 80px;
+    	}
+        .logout{
+            position: absolute;
+            right: 15%;
+            top: 3%;
+        }
+        .wrapper{
+        	margin-left: 3%;
+        }
+        
+
+    	
+        
+    </style>
+	</head>
+	<body>
+		<div class="banner">
+			<div class='welcome'><h2>Welcome, {{alias}} !</h2></div>
+			<div class='logout'><a href="/logout">Logout</a></div>
+		</div>
+		<div class= 'wrapper'><br><br>
+
+			<div class="friends">
+				<h4>Here is a list of your friends:</h4>
+				<table class= "table table-bordered">
+					<tr>
+						<th>Alias</th>
+						<th>Action</th>
+					</tr>
+
+					{%for x in my_friends%}
+					<tr>
+						<td>{{x['alias']}}</td>
+						<td><a href="/user/{{x['id']}}">View Profile</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="/remove/{{x['id']}}">Remove as Friend</td>
+					</tr>
+					{%endfor%}
+				</table>
+				
+				
+			</div><br><br><br>
+			<div class= 'others'>
+				<h4>Other Users not on your friend's list:</h4>
+				<table class= "table table-bordered">
+					<tr>
+						<th>Alias</th> 
+						<th>Action</th>
+					
+					</tr>
+					
+					{%for x in display_friends%}
+					<tr>
+						<td><a href="/user/{{x['id']}}">{{x['alias']}}</td>
+
+						<td><form action= "/add/{{x['id']}}" method = "post">
+							<input type="hidden" name="add">
+							<input type="submit" value="Add as Friend">
+						</form></td>	
+					</tr>
+					{%endfor%}	
+				</table>
+			</div>
+		</div>
+	</body>
+</html>

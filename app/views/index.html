@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  	<link rel="stylesheet" href="/resources/demos/style.css">
+  	
+    <title>Login/Registration</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+    	.lform, .rform{
+    		border: 1px solid black;
+    		width: 400px;
+    		display: inline-block;
+    		vertical-align: top;
+    		margin: 50px;
+    		padding: 20px;
+    	}
+    	.button{
+    		background-color: #3b5998;
+    		color:white;
+    	}
+    	h2{
+    		margin-left: 50px;	
+    	}
+    </style>
+  </head>
+  <body>
+  	<div class= 'wrapper'>
+  	<h2>Welcome!</h2>
+      <div class= "rform">
+      <h3>REGISTRATION</h3><hr>
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+      <form action='/create' method='post'>
+          Name: <input type='text' name='name'><br><br>
+          Alias: <input type='text' name='alias'><br><br>
+          Email: <input type='email' name='email'><br><br>
+          Password: <input type='password' name='password'><br><br>
+          Confirm Password: <input type='password' name='confirmpw' ><br><br>
+          Date of Birth: <input type="date"  name='birthday'>
+          <br><br>
+          <input type='submit' value='Register' class = 'button'>
+      </form>
+      </div>
+
+
+
+      <div class= "lform">
+      <h3>LOGIN</h3><hr>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+     {% if messages %}
+       <ul class=flashes>
+       {% for category, message in messages %}
+         <li class="{{ category }}">{{ message }}</li>
+       {% endfor %}
+       </ul>
+     {% endif %}
+   {% endwith %}
+      <form action='/friends' method='post'>
+          Email: <input type='email' name='email'><br><br>
+          Password: <input type='password' name='password'><br><br>
+          <input type='submit' value='Log In' class= 'button'>
+      </form>
+  
+      </div>
+     </div>	
+  </body>
+</html>
